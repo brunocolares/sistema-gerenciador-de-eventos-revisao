@@ -1,10 +1,12 @@
 package application;
 
+import interfaces.GerenciadorTela;
+
 public class Program {
 
 	public static void main(String[] args) {
-		System.out.println("* SISTEMA GERENCIADOR DE EVENTOS");
-
+		GerenciadorTela gerenciador = new GerenciadorTela();
 	}
+	
 
 }
