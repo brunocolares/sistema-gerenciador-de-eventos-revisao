@@ -34,9 +34,11 @@ public class GerenciadorTela {
 	public void exibirMenuAposOperacao() throws ParseException {
 		System.out.print("Você deseja realizar outra operação[s/n]? ");
 		char segundaOperacao = sc.next().charAt(0);
+		sc.nextLine();
 		if(segundaOperacao == 's') {
 			System.out.println("Digite a opção desejada[1-4]: ");
 			int opcaoDesejada = sc.nextInt();
+			sc.nextLine();
 			selecionarOpcaoDesejada(opcaoDesejada);
 		}
 		
@@ -72,13 +74,13 @@ public class GerenciadorTela {
 		System.out.print("[CONFERENCIA/WORKSHOP/SEMINARIO/SHOW/OUTRO: ");
 		CategoriaEvento categoriaEvento = CategoriaEvento.valueOf(sc.next());
 		sc.nextLine();
-		System.out.println("Digite o estado do evento: ");
+		System.out.print("Digite o estado do evento: ");
 		String estado = sc.nextLine();
-		System.out.println("Digite a cidade do evento: ");
+		System.out.print("Digite a cidade do evento: ");
 		String cidadeEvento = sc.nextLine();
-		System.out.println("Digite o endereço do evento: ");
+		System.out.print("Digite o endereço do evento: ");
 		String enderecoEvento = sc.nextLine();
-		System.out.println("Digite o numero do evento: ");
+		System.out.print("Digite o numero do evento: ");
 		String numeroEvento = sc.nextLine();
 		Local local = new Local(estado, cidadeEvento, enderecoEvento, numeroEvento);
 		System.out.print("Evento gratuito ou pago(g/p)? ");
@@ -102,7 +104,9 @@ public class GerenciadorTela {
 	private void listarEventos() throws ParseException {
 		List<Evento> eventos = gerenciadorEvento.listarEventos();
 		if(eventos.size() > 0) {
+			System.out.println("* Lista de eventos:");
 			for(Evento evento : eventos) {
+				System.out.println("--------------------------");
 				evento.exibirDescricao();
 			}
 		} else {
@@ -111,7 +115,21 @@ public class GerenciadorTela {
 		exibirMenuAposOperacao();
 	}
 	
-	private void buscarEventosPorData() {
+	private void buscarEventosPorData() throws ParseException {
+		System.out.print("Digite a data para realizar a busca de evento(dd/MM/yyy): ");
+		String dataParaBusca = sc.nextLine();
+		
+		List<Evento> eventos = gerenciadorEvento.buscarEventosPorData(dataParaBusca);
+			if(eventos.size() > 0) {
+				System.out.println("* Lista de eventos em "+dataParaBusca+": ");
+				for(Evento evento : eventos) {
+					System.out.println("--------------------------");
+					evento.exibirDescricao();
+				}
+			} else {
+				System.out.print("Não há nenhum evento criado em "+dataParaBusca);
+			}
+		exibirMenuAposOperacao();
 		
 	}
 	
