@@ -136,5 +136,6 @@ public class GerenciadorTela {
 	private void sair() {
 		System.out.println("Encerramento o sistema Gerenciador de Evento...");
 		System.out.println("Sistema encerrado.");
+		sc.close();
 	}
 }
